@@ -1,0 +1,26 @@
+
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Luo uusi asiakas</title>
+    </head>
+    <body>
+        <h1>Luo uusi asiakas</h1>
+        <form:form commandName="asiakas" action="${pageContext.request.contextPath}/lisaaasiakas" method="POST">
+            Etunimi: <form:input path="etunimi" /><form:errors path="etunimi" /><br/>
+            Sukunimi: <form:input path="sukunimi" /><form:errors path="sukunimi" /><br/>
+            Osoite: <form:input path="osoite" /><form:errors path="osoite" /><br/>
+            <p>Valitse omalääkäri:
+                <select name="laakariId">
+                <c:forEach var="laakari" items="${laakarit}">
+                    <option value="${laakari.id}">${laakari.etunimi}</option>
+                </c:forEach>
+            </select>
+            </p><input type="submit">
+        </form:form>
+    </body>
+</html>

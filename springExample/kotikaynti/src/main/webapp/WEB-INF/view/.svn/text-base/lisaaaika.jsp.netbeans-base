@@ -1,0 +1,33 @@
+
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Luo uusi aika</title>
+    </head>
+    <body>
+        <h1>Luo uusi ajanvarausaika</h1>
+        <form:form commandName="aika" action="${pageContext.request.contextPath}/lisaaaika" method="POST">
+            <p>Valitse lääkäri:
+                <select name="laakariId">
+                <c:forEach var="laakari" items="${laakarit}">
+                    <option value="${laakari.id}">${laakari.etunimi}</option>
+                </c:forEach>
+            </select>
+            </p>
+
+
+            Päivä: <form:input path="paiva" /><form:errors path="paiva" /><br/>
+            Kuukausi: <form:input path="kuukausi" /><form:errors path="kuukausi" /><br/>
+            Vuosi: <form:input path="vuosi" /><form:errors path="vuosi" /><br/>
+            Tunti: <form:input path="tunti" /><form:errors path="tunti" /><br/>
+            Minuutti: <form:input path="minuutti" /><form:errors path="minuutti" /><br/>
+            Kesto: <form:input path="kesto" /><form:errors path="kesto" /><br/>
+            
+            <input type="submit">
+        </form:form>
+    </body>
+</html>
