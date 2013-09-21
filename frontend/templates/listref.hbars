@@ -1,0 +1,5 @@
+<ul class="references">
+    {{#each references}}
+    <li class="reference type-{{type}}">{{fields.author}} {{fields.title}} {{fields.bookTitle}} {{fields.year}} <a class="edit">edit</a></li>
+    {{/each}}
+</ul>
