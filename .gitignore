@@ -12,3 +12,8 @@ target/
 # Subversion files
 .svn/
 
+# IntelliJ
+*/.idea/*
+*/*/.idea/*
+*.iml
+
