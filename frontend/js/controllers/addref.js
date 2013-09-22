@@ -1,12 +1,16 @@
 define([
   'hbars!templates/addref',
+  'hbars!templates/reference',
   'bjq',
   'controllers/listref'
-], function(template, bjq, list) {
+], function(tplList, tplRef, bjq, list) {
 
   // Renders the login form inside element.
   function render(element) {
-    element.html(template());
+    Handlebars.registerPartial('reference', tplRef);
+    console.log(Handlebars.partials);
+    console.log(Handlebars.templates);
+    element.html(tplList());
     bindEvents(element);
   }
 
@@ -44,8 +48,7 @@ define([
 
   // Submits the data to server updates view.
   function addNewReference(data) {
-    list.add('<li>FUUU</li>');
-    // TODO: A cross refenrence to lis for adding ad new
+    list.add(tplRef(data));
 
   }
 
