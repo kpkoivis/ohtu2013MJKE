@@ -1,0 +1,86 @@
+/* =============================================================================
+   Shared global styles.
+   ========================================================================== */
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: @colorClouds;
+  margin-top: 80px;
+  position: relative;
+}
+
+.appWrapper {
+  min-width: 980px;
+}
+
+/* =============================================================================
+   Typography.
+   ========================================================================== */
+
+@mainHeadingFont: 'Lobster', cursive;
+@bodyFont: 'Raleway', serif;
+@headingFont:  'Raleway', serif;
+
+
+html { font-size: 62.5%; }
+body { font-size: 1.8rem; } /* =14px */
+
+body,
+button,
+input,
+select,
+textarea {
+  color: @colorMidnight;
+  font-family: @bodyFont;
+  font-weight: 300;
+}
+
+// Headings.
+h1, h2, h3, h4, h5, h6 {
+  font-family: @headingFont;
+  font-weight: normal;
+}
+
+.site-title {
+  font-family: @mainHeadingFont;
+  font-size: 8.0rem;
+  margin: 40px 0 0 0;
+  text-align: center;
+  text-shadow: 5px 5px #ccc;
+  -webkit-text-stroke: 1px #555;
+}
+
+.tagline {
+  font-family: @mainHeadingFont;
+  margin: 0;
+  margin-bottom: 40px;
+  color: #ccc;
+  font-size: 30px;
+  text-align: center;
+  -webkit-text-stroke: 1px #aaa;
+}
+
+.form-title {
+  color: #000;
+}
+
+// Throbber.
+.throbber {
+  background: url(../img/throbber.gif) center center no-repeat;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+}
+
+.add-reference-form,
+.reference-list {
+  float: left;
+  padding: 0 40px;
+  width: 400px;
+}
+

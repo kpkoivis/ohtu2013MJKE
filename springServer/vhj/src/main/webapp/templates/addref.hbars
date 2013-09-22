@@ -1,6 +1,7 @@
 <form id="add-reference" class="add-reference">
+    <h2 class="form-title">Lisää viite</h2>
     <div class="form-field">
-        <label>Refrence type</label>
+        <label>Viitteen tyyppi</label>
         <select name="type" data-type="meta">
             <option value="inproceedings">Inproceedings</option>
         </select>

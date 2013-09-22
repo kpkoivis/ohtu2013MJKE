@@ -36,11 +36,11 @@ public class ViiteController {
         // Onko viite jo?
         List<Viite> viitteet = viiteService.list();
         for (Viite l : viitteet) {
-            if (l.getTunnus().equals(viite.getTunnus())) {
-                // Mitä tehdään jos viite on jo?
-                // return "viite/lisaaviite_unsuccessful_tunnus_isalready";
-                return "";
-            }
+//            if (l.getTunnus().equals(viite.getTunnus())) {
+//                // Mitä tehdään jos viite on jo?
+//                // return "viite/lisaaviite_unsuccessful_tunnus_isalready";
+//                return "";
+//            }
         }
         viiteService.create(viite);
         model.addAttribute("viite", viite);

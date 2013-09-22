@@ -8,9 +8,13 @@ define([
   // Renders the login form inside element.
   function render(elem) {
     element = elem;
+
+    // TODO: Load the data from server.
+    // Get /listaaviitteet
     console.log(data);
     element.html(tplList(data));
-    //bindEvents(element);
+
+    // TODO: Add logic for editing the references.
   }
 
   function append(data) {

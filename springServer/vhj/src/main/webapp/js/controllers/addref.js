@@ -6,7 +6,6 @@ define([
 
   // Renders the login form inside element.
   function render(element) {
-//    Handlebars.registerPartial('reference', tplRef);
     element.html(tplList());
     bindEvents(element);
   }
@@ -19,6 +18,10 @@ define([
     submitClick.onValue(function() {
       var data = getFormValues(element.find('form'));
       console.log(data);
+
+      // TODO: Post the form data to server with ajax.
+      // /lisaaviite
+
       list.add(data);
 
     });
