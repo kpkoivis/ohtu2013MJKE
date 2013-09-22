@@ -1,15 +1,12 @@
 define([
-  'hbars!templates/addref',
-  'hbars!templates/reference',
+  'hbs!templates/addref',
   'bjq',
   'controllers/listref'
-], function(tplList, tplRef, bjq, list) {
+], function(tplList, bjq, list) {
 
   // Renders the login form inside element.
   function render(element) {
-    Handlebars.registerPartial('reference', tplRef);
-    console.log(Handlebars.partials);
-    console.log(Handlebars.templates);
+//    Handlebars.registerPartial('reference', tplRef);
     element.html(tplList());
     bindEvents(element);
   }
@@ -21,35 +18,29 @@ define([
     // Form submitted.
     submitClick.onValue(function() {
       var data = getFormValues(element.find('form'));
-
-      addNewReference(data);
+      console.log(data);
+      list.add(data);
 
     });
   }
 
   // Gets form values from the add form.
   function getFormValues(form) {
-    var inputs = form.find('input'),
-        selects = form.find('select'),
-        data = {};
+    var fields = form.find('[data-type="field"]'),
+        meta = form.find('[data-type="meta"]'),
+        data = {'fields' : {}};
 
-    inputs.each(function(i, el) {
+    fields.each(function(i, el) {
       var el = $(el);
-      data[el.prop('name')] = el.val();
+      data.fields[el.prop('name')] = el.val();
     })
 
-    selects.each(function(i, el) {
+    meta.each(function(i, el) {
       var el = $(el);
       data[el.prop('name')] = el.val();
     })
 
     return data;
-  }
-
-  // Submits the data to server updates view.
-  function addNewReference(data) {
-    list.add(tplRef(data));
-
   }
 
 

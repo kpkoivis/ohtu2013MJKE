@@ -4,12 +4,19 @@ require({
 
   baseUrl: './js',
 
+  hbs : {
+    templateExtension : 'hbars',
+    disableI18n : true
+  },
+
   paths: {
     jquery: 'lib/jquery-1.10.2.min',
     templates: '../templates',
     Handlebars: 'lib/handlebars',
-    hbars: 'lib/hbars',
-    text: 'lib/text',
+    hbs: 'lib/hbs',
+    underscore : 'lib/hbs/underscore',
+    i18nprecompile : 'lib/hbs/i18nprecompile',
+    json2 : 'lib/hbs/json2',
     bacon: 'lib/bacon',
     bjq: 'lib/bacon-bjq',
     lodash: 'lib/lodash',
@@ -22,9 +29,6 @@ require({
     jquery: { exports: '$' },
     lodash: { exports: '_' },
     error: { deps: ['jquery']}
-  },
-  hbars: {
-    extension: '.hbars'
   }
 })
 
