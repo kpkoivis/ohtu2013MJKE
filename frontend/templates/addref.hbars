@@ -1,0 +1,33 @@
+<form id="add-reference" class="add-reference">
+    <div class="form-field">
+        <label>Refrence type</label>
+        <select name="type" data-type="meta">
+            <option value="inproceedings">Inproceedings</option>
+        </select>
+    </div>
+
+    <div class="form-field">
+        <label for="author-field">Author</label>
+        <input id="author-field" name="author" type="text" data-type="field" />
+    </div>
+
+    <div class="form-field">
+        <label for="title-field">Title</label>
+        <input id="title-field" name="title" type="text" data-type="field" />
+    </div>
+
+    <div class="form-field">
+        <label for="title-field">Book Title</label>
+        <input id="title-field" name="bookTitle" type="text" data-type="field" />
+    </div>
+
+    <div class="form-field">
+        <label for="year-field">Year</label>
+        <input id="year-field" name="year" type="text" data-type="field" />
+    </div>
+
+    <div class="form-field">
+        <button class="submit btn">Lähetä</button>
+    </div>
+
+</form>

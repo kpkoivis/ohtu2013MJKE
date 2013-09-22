@@ -1,0 +1,5 @@
+<ul class="references">
+    {{#each references}}
+      {{> templates_reference}}
+    {{/each}}
+</ul>
