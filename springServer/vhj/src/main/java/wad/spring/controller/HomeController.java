@@ -14,6 +14,7 @@ public class HomeController {
     
     @RequestMapping(value = "/home")
     public String home(Model model) {
-        return "toimintovalikko";
-    }
+        //return "toimintovalikko";
+        return "test";
+    } 
 }

@@ -39,16 +39,23 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+
+
     <servlet-mapping>
         <servlet-name>spring-front-controller</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>*.do</url-pattern>
     </servlet-mapping>
+   
 
+   
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
 
     <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <!-- we are not using jsp files
         <welcome-file>index.jsp</welcome-file>
+        -->
     </welcome-file-list>
 </web-app>
