@@ -9,10 +9,22 @@ define([
   function render(elem) {
     element = elem;
 
-    // TODO: Load the data from server.
-    // Get /listaaviitteet
-    console.log(data);
-    element.html(tplList(data));
+    // Loads the references from server.
+    var request = Bacon.once({
+      type: 'get',
+      url: '/vhj/listaaviitteet.do'
+    }).ajax();
+
+    // Success callback.
+    request.onValue(function(response) {
+      element.html(tplList(response));
+    });
+
+    // Error callback.
+    request.onError(function(err) {
+      console.log(err);
+    });
+
 
     // TODO: Add logic for editing the references.
   }

@@ -14,15 +14,27 @@ define([
   function bindEvents(element) {
     var submitClick = element.find('button.submit').asEventStream('click').doAction('.preventDefault');
 
+    // TODO: Don't allow form submission without all fields filled.
+
     // Form submitted.
     submitClick.onValue(function() {
       var data = getFormValues(element.find('form'));
-      console.log(data);
 
-      // TODO: Post the form data to server with ajax.
-      // /lisaaviite
+      // Ajax post request for adding data.
+      var request = Bacon.once({
+        contentType: 'application/json',
+        dataType: 'json',
+        type: 'post',
+        data: JSON.stringify(data.fields),
+        url: '/vhj/lisaaviite.do'
+      }).ajax();
 
-      list.add(data);
+      request.onValue(function(response) {
+        list.add(data.fields);
+      });
+      request.onError(function(err) {
+        console.log(err);
+      });
 
     });
   }

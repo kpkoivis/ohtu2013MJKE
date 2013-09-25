@@ -1,1 +1,1 @@
-<li class="reference type-{{type}}">{{fields.author}} {{fields.title}} {{fields.bookTitle}} {{fields.year}} <a class="edit">edit</a></li>
+<li class="reference type-{{type}}">{{author}} {{title}} {{bookTitle}} {{itemYear}} <a class="edit">edit</a></li>

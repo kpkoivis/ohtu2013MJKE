@@ -24,7 +24,7 @@
 
     <div class="form-field">
         <label for="year-field">Year</label>
-        <input id="year-field" name="year" type="text" data-type="field" />
+        <input id="year-field" name="itemYear" type="text" data-type="field" />
     </div>
 
     <div class="form-field">
