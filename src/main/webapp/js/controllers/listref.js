@@ -12,7 +12,7 @@ define([
     // Loads the references from server.
     var request = Bacon.once({
       type: 'get',
-      url: '/vhj/listaaviitteet.do'
+      url: '/listaaviitteet.do'
     }).ajax();
 
     // Success callback.

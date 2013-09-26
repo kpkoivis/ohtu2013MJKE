@@ -13,7 +13,6 @@ target/
 .svn/
 
 # IntelliJ
-*/.idea/*
-*/*/.idea/*
+.idea/*
 *.iml
 

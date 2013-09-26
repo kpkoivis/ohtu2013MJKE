@@ -26,7 +26,7 @@ define([
         dataType: 'json',
         type: 'post',
         data: JSON.stringify(data.fields),
-        url: '/vhj/lisaaviite.do'
+        url: '/lisaaviite.do'
       }).ajax();
 
       request.onValue(function(response) {
