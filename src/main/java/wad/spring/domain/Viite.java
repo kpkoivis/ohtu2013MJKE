@@ -12,6 +12,7 @@ public class Viite implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long        id;
+    private String      viiteId;
     private String      author;
     private String      title;
     private String      bookTitle;
@@ -23,6 +24,14 @@ public class Viite implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getViiteId() {
+        return viiteId;
+    }
+
+    public void setViiteId(String viiteId) {
+        this.viiteId = viiteId;
     }
 
     public String getAuthor() {
@@ -55,5 +64,26 @@ public class Viite implements Serializable {
 
     public void setItemYear(String year) {
         this.itemYear = year;
+    }
+    
+    public String toStringBiBTex() {
+        String bibtex = "@inproceedings{";
+        bibtex += this.viiteId + ",\n";
+        bibtex += "author = {" + bibtexCharReplace(this.author) + "},\n";
+        bibtex += "title = {" + bibtexCharReplace(this.title) + "},\n";
+        bibtex += "booktitle = {" + bibtexCharReplace(this.bookTitle) + "},\n";
+        bibtex += "year = {" + bibtexCharReplace(this.itemYear) + "},\n";
+        bibtex += "}\n";
+        return bibtex;
+    }
+
+    private String bibtexCharReplace(String s) {
+        s = s.replace("ä", "\\" + "\"" + "{a}");
+        s = s.replace("ö", "\\" + "\"" + "{o}");
+        s = s.replace("Ä", "\\" + "\"" + "{A}");
+        s = s.replace("Ö", "\\" + "\"" + "{O}");
+        s = s.replace("å", "\\" + "aa");
+        s = s.replace("Å", "\\" + "AA");
+        return s;
     }
 }

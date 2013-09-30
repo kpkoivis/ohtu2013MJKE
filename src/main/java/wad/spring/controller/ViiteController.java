@@ -32,4 +32,11 @@ public class ViiteController {
         List<Viite> viiteLista = viiteService.list();
         return viiteLista;
     }
+    
+    @RequestMapping(value = "/listaaviitteetBiBTeX.do", method = RequestMethod.GET, produces="text/plain" )
+    @ResponseBody
+    public String listaaViitteetBiBTex() {
+        String bibtex = viiteService.listAllBiBTeX();
+        return bibtex;
+    }
 }
