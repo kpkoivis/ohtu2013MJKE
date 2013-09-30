@@ -12,6 +12,7 @@ public class Viite implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long        id;
+    private String      referenceId;
     private String      author;
     private String      title;
     private String      bookTitle;
@@ -23,6 +24,14 @@ public class Viite implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getReferenceId() {
+        return referenceId;
+    }
+
+    public void setReferenceId(String referenceId) {
+        this.referenceId = referenceId;
     }
 
     public String getAuthor() {

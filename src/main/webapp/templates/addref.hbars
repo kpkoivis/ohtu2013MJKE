@@ -7,24 +7,29 @@
         </select>
     </div>
 
-    <div class="form-field">
+    <div class="form-field required">
+        <label for="id-field">Reference id</label>
+        <input id="id-field" name="referenceId" type="text" data-type="field" data-required="true" />
+    </div>
+
+    <div class="form-field required">
         <label for="author-field">Author</label>
-        <input id="author-field" name="author" type="text" data-type="field" />
+        <input id="author-field" name="author" type="text" data-type="field" data-required="true" />
     </div>
 
-    <div class="form-field">
+    <div class="form-field required">
         <label for="title-field">Title</label>
-        <input id="title-field" name="title" type="text" data-type="field" />
+        <input id="title-field" name="title" type="text" data-type="field" data-required="true" />
     </div>
 
-    <div class="form-field">
+    <div class="form-field required">
         <label for="title-field">Book Title</label>
-        <input id="title-field" name="bookTitle" type="text" data-type="field" />
+        <input id="title-field" name="bookTitle" type="text" data-type="field" data-required="true" />
     </div>
 
-    <div class="form-field">
+    <div class="form-field required">
         <label for="year-field">Year</label>
-        <input id="year-field" name="itemYear" type="text" data-type="field" />
+        <input id="year-field" name="itemYear" type="text" data-type="field" data-required="true" />
     </div>
 
     <div class="form-field">

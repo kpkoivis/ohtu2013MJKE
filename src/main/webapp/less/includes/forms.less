@@ -46,8 +46,15 @@ input {
   }
 }
 
-.form-element {
+.form-field {
   margin-bottom: 10px;
+
+  &.required {
+    label:after {
+      color: #f00;
+      content: " *";
+    }
+  }
 }
 
 /* =============================================================================
