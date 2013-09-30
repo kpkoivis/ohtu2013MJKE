@@ -1,3 +1,9 @@
+<form action="/lataaBibtext.do">
+    <button type="submit" class="btn">
+        Lataa BibText muodossa
+    </button>
+</form>
+
 <ul class="references">
     {{#each this}}
       {{> templates_reference}}
