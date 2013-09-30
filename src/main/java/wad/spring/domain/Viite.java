@@ -68,7 +68,7 @@ public class Viite implements Serializable {
     
     public String toStringBiBTex() {
         String bibtex = "@inproceedings{";
-        bibtex += this.viiteId + ",\n";
+        bibtex += this.referenceId + ",\n";
         bibtex += "author = {" + bibtexCharReplace(this.author) + "},\n";
         bibtex += "title = {" + bibtexCharReplace(this.title) + "},\n";
         bibtex += "booktitle = {" + bibtexCharReplace(this.bookTitle) + "},\n";
