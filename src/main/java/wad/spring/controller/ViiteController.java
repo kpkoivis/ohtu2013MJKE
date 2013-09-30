@@ -45,9 +45,7 @@ public class ViiteController {
         String tiedostonNimi = "testBibText.txt";
         URL url = getClass().getResource("/" + tiedostonNimi);
         File f = new File(url.toURI());
-        System.out.println("Ladataan tiedostoa " + tiedostonNimi + "("+f.getAbsolutePath()+")");
         if (f.exists()) {
-          //res.setContentType("text/plain");
           res.setContentLength(new Long(f.length()).intValue());
           res.setHeader("Content-Disposition", "attachment; filename=\"" + tiedostonNimi + "\"");
           FileCopyUtils.copy(new FileInputStream(f), res.getOutputStream());
@@ -57,6 +55,12 @@ public class ViiteController {
       } catch (Exception e) {
         System.out.println(e.getMessage());
       }
-
+    }
+    
+    @RequestMapping(value = "/listaaviitteetBiBTeX.do", method = RequestMethod.GET, produces="text/plain" )
+    @ResponseBody
+    public String listaaViitteetBiBTex() {
+        String bibtex = viiteService.listAllBiBTeX();
+        return bibtex;
     }
 }

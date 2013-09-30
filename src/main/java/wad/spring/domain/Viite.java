@@ -65,4 +65,25 @@ public class Viite implements Serializable {
     public void setItemYear(String year) {
         this.itemYear = year;
     }
+    
+    public String toStringBiBTex() {
+        String bibtex = "@inproceedings{";
+        bibtex += this.viiteId + ",\n";
+        bibtex += "author = {" + bibtexCharReplace(this.author) + "},\n";
+        bibtex += "title = {" + bibtexCharReplace(this.title) + "},\n";
+        bibtex += "booktitle = {" + bibtexCharReplace(this.bookTitle) + "},\n";
+        bibtex += "year = {" + bibtexCharReplace(this.itemYear) + "},\n";
+        bibtex += "}\n";
+        return bibtex;
+    }
+
+    private String bibtexCharReplace(String s) {
+        s = s.replace("ä", "\\" + "\"" + "{a}");
+        s = s.replace("ö", "\\" + "\"" + "{o}");
+        s = s.replace("Ä", "\\" + "\"" + "{A}");
+        s = s.replace("Ö", "\\" + "\"" + "{O}");
+        s = s.replace("å", "\\" + "aa");
+        s = s.replace("Å", "\\" + "AA");
+        return s;
+    }
 }

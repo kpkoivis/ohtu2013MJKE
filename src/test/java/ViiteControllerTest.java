@@ -1,8 +1,7 @@
-import com.github.springtestdbunit.DbUnitTestExecutionListener;
-import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.springtestdbunit.annotation.ExpectedDatabase;
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,25 +13,17 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static org.mockito.Mockito.*;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.test.web.servlet.ResultActions;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import wad.spring.config.WebAppContext;
 import wad.spring.domain.Viite;
 import wad.spring.service.ViiteService;
-import static org.junit.Assert.*;
+
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
@@ -114,10 +105,8 @@ public class ViiteControllerTest {
     
     
      @Test
-     public void viiteControllerLisaaViite() throws Exception {
+     public void viiteControllerLisaaViiteTest() throws Exception {
         String createJson = "{\"id\":%d,\"author\":\"%s\",\"title\":\"%s\",\"bookTitle\":\"%s\"}";
-        
-        //when(viiteServiceMock.list()).thenReturn(Arrays.asList(viitteet.get(0), viitteet.get(1)));
 
         mockMvc.perform(post("/lisaaviite.do")
                 .contentType(MediaType.APPLICATION_JSON)

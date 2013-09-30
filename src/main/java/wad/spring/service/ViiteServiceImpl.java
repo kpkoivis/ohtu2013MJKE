@@ -29,4 +29,14 @@ public class ViiteServiceImpl implements ViiteService {
     public Viite findOne(Long id) {
         return viiteRepository.findOne(id);
     }
+
+    @Override
+    public String listAllBiBTeX() {
+        String bibtex = "";
+        List<Viite> viitteet = this.list();
+        for (Viite v : viitteet) {
+            bibtex += v.toStringBiBTex() + "\n";
+        }
+        return bibtex;
+    }
 }

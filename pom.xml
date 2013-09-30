@@ -20,6 +20,7 @@
             <url>http://repo.springsource.org/milestone/</url>
         </repository>
     </repositories>
+    
     <properties>
 
         <bonecp.version>0.7.1.RELEASE</bonecp.version>
@@ -180,11 +181,6 @@
                 <configuration>
                     <reportPlugins>
                         <plugin>
-                            <groupId>org.codehaus.mojo</groupId>
-                            <artifactId>cobertura-maven-plugin</artifactId>
-                            <version>2.5.2</version>
-                        </plugin>
-                        <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-javadoc-plugin</artifactId>
                             <version>2.9</version>
@@ -195,8 +191,6 @@
         </plugins>
     </build>
     <dependencies>
-
-
 
 	<!-- jetty for he-ro-kuuu -->
         <dependency>
