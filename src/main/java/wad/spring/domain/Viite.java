@@ -74,6 +74,7 @@ public class Viite implements Serializable {
         bibtex += "booktitle = {" + bibtexCharReplace(this.bookTitle) + "},\n";
         bibtex += "year = {" + bibtexCharReplace(this.itemYear) + "},\n";
         bibtex += "}\n";
+        System.out.println("*" + bibtex);
         return bibtex;
     }
 
