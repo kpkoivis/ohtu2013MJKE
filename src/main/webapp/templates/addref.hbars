@@ -2,34 +2,34 @@
     <h2 class="form-title">Lisää viite</h2>
     <div class="form-field">
         <label>Viitteen tyyppi</label>
-        <select name="type" data-type="meta">
+        <select name="type" data-type="meta" required>
             <option value="inproceedings">Inproceedings</option>
         </select>
     </div>
 
     <div class="form-field required">
         <label for="id-field">Reference id</label>
-        <input id="id-field" name="referenceId" type="text" data-type="field" data-required="true" />
+        <input id="id-field" name="referenceId" type="text" data-type="field" data-required="true" required />
     </div>
 
     <div class="form-field required">
         <label for="author-field">Author</label>
-        <input id="author-field" name="author" type="text" data-type="field" data-required="true" />
+        <input id="author-field" name="author" type="text" data-type="field" data-required="true" required />
     </div>
 
     <div class="form-field required">
         <label for="title-field">Title</label>
-        <input id="title-field" name="title" type="text" data-type="field" data-required="true" />
+        <input id="title-field" name="title" type="text" data-type="field" data-required="true" required />
     </div>
 
     <div class="form-field required">
         <label for="title-field">Book Title</label>
-        <input id="title-field" name="bookTitle" type="text" data-type="field" data-required="true" />
+        <input id="title-field" name="bookTitle" type="text" data-type="field" data-required="true" required />
     </div>
 
     <div class="form-field required">
         <label for="year-field">Year</label>
-        <input id="year-field" name="itemYear" type="text" data-type="field" data-required="true" />
+        <input id="year-field" name="itemYear" type="text" data-type="field" data-required="true" required />
     </div>
 
     <div class="form-field">
