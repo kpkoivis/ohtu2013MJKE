@@ -7,10 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import wad.spring.domain.Viite;
 import wad.spring.service.ViiteService;
 
@@ -38,28 +35,14 @@ public class ViiteController {
         return viiteLista;
     }
 
-    @RequestMapping(value = "/lataaBibtext.do", method = RequestMethod.GET, headers = "Accept=application/json")
-    public void genereoiBibText(HttpServletResponse res) {
-      try {
-        String tiedostonNimi = "testBibText.txt";
-        URL url = getClass().getResource("/" + tiedostonNimi);
-        File f = new File(url.toURI());
-        if (f.exists()) {
-          res.setContentLength(new Long(f.length()).intValue());
-          res.setHeader("Content-Disposition", "attachment; filename=\"" + tiedostonNimi + "\"");
-          FileCopyUtils.copy(new FileInputStream(f), res.getOutputStream());
-        } else {
-          System.out.println("Tiedostoa " + tiedostonNimi + "(" + f.getAbsolutePath() + ") ei löydy");
-        }
-      } catch (Exception e) {
-        System.out.println(e.getMessage());
-      }
-    }
     
-    @RequestMapping(value = "/listaaviitteetBiBTeX.do", method = RequestMethod.GET, produces="text/plain" )
+    @RequestMapping(value = "/lataaBibtext.do", method = RequestMethod.GET)
     @ResponseBody
-    public String listaaViitteetBiBTex() {
+    public String listaaViitteetBiBTex(HttpServletResponse res, @RequestParam("name") String name) {
         String bibtex = viiteService.listAllBiBTeX();
+        String tiedostonNimi = name + ".bib";
+        res.setContentLength(bibtex.length());
+        res.setHeader("Content-Disposition", "attachment; filename=\"" + tiedostonNimi + "\"");
         return bibtex;
     }
 }

@@ -31,6 +31,9 @@ define([
 
       request.onValue(function(response) {
         list.add(data.fields);
+        element.find('form').each(function() {
+          this.reset();
+        });
       });
       request.onError(function(err) {
         console.log(err);

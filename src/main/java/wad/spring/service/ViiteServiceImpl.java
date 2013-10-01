@@ -1,5 +1,6 @@
 package wad.spring.service;
 
+import java.io.File;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,9 @@ public class ViiteServiceImpl implements ViiteService {
         for (Viite v : viitteet) {
             bibtex += v.toStringBiBTex() + "\n";
         }
+
         return bibtex;
     }
+
+
 }
