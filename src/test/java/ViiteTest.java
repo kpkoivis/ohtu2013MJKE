@@ -80,17 +80,6 @@ public class ViiteTest {
         viite.setReferenceId("123456");
         assertEquals(viite.getReferenceId(), "123456");
     }
-    /*
-     * 
-     bibtex += this.referenceId + ",\n";
-     bibtex += "author = {" + bibtexCharReplace(this.author) + "},\n";
-     bibtex += "title = {" + bibtexCharReplace(this.title) + "},\n";
-     bibtex += "booktitle = {" + bibtexCharReplace(this.bookTitle) + "},\n";
-     bibtex += "year = {" + bibtexCharReplace(this.itemYear) + "},\n";
-     bibtex += "}\n";
-     * 
-     * 
-     */
 
     @Test
     public void testToStringBiBTex() {
@@ -107,7 +96,5 @@ public class ViiteTest {
         oikea += "year = {1900},\n";
         oikea += "}\n";
         assertEquals(oikea, viite.toStringBiBTex());
-
-
     }
 }
