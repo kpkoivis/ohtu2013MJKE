@@ -94,7 +94,13 @@ public class ViiteControllerTest {
                 .andExpect(jsonPath("$..bookTitle[1]").value(viitteet.get(1).getBookTitle()))
                 .andExpect(jsonPath("$..title[1]").value(viitteet.get(1).getTitle()))
                 
-                .andExpect(jsonPath("$..id[2]").doesNotExist())
+                //Test third item (viite) in JSON response
+                .andExpect(jsonPath("$..id[2]").value(viitteet.get(1).getId().intValue()))
+                .andExpect(jsonPath("$..author[2]").value(viitteet.get(1).getAuthor()))
+                .andExpect(jsonPath("$..bookTitle[2]").value(viitteet.get(1).getBookTitle()))
+                .andExpect(jsonPath("$..title[2]").value(viitteet.get(1).getTitle()))
+                
+                .andExpect(jsonPath("$..id[3]").doesNotExist())
                 //.andDo(print());
                 ;
 
