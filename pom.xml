@@ -263,7 +263,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>3.1.0.RELEASE</version>
+            <version>${spring.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -274,7 +274,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>3.1.1.RELEASE</version>
+            <version>${spring.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -285,7 +285,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>3.1.0.RELEASE</version>
+            <version>${spring.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -466,7 +466,7 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
-
+<!--
 <dependency>
 	<groupId>com.github.springtestdbunit</groupId>
 	<artifactId>spring-test-dbunit</artifactId>
@@ -474,7 +474,7 @@
         <scope>test</scope>
 </dependency>
 
-
+-->
 
 
         <dependency>
