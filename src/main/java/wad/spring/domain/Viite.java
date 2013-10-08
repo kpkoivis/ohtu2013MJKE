@@ -4,6 +4,8 @@
  */
 package wad.spring.domain;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -11,12 +13,11 @@ public class Viite implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long        id;
-    private String      referenceId;
-    private String      author;
-    private String      title;
-    private String      bookTitle;
-    private String      itemYear;
+    private Long                    id;
+    private String                  referenceId;
+    private String                  viiteType;
+    private ArrayList<ViiteItem>    items = new ArrayList<ViiteItem>();
+    
     
     public Long getId() {
         return id;
@@ -34,45 +35,52 @@ public class Viite implements Serializable {
         this.referenceId = referenceId;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getViiteType() {
+        return viiteType;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setViiteType(String viiteType) {
+        this.viiteType = viiteType;
     }
 
-    public String getTitle() {
-        return title;
+    public List<ViiteItem> getItems() {
+        return items;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setItems(ArrayList<ViiteItem> items) {
+        this.items = items;
     }
 
-    public String getBookTitle() {
-        return bookTitle;
-    }
-
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
-    }
-
-    public String getItemYear() {
-        return itemYear;
-    }
-
-    public void setItemYear(String year) {
-        this.itemYear = year;
+    public boolean addItem(ViiteItem item) {
+        return this.items.add(item);
     }
     
+    public boolean removeItem(ViiteItem item) {
+        return this.items.remove(item);
+    }
+    
+    public boolean addItem(String fieldName, String fieldValue) {
+        ViiteItem vi = new ViiteItem();
+        vi.setFieldName(fieldName);
+        vi.setFieldValue(fieldValue);
+        return this.addItem(vi);
+    }
+
+    public String getItemValueWithFieldName(String fieldName) {
+        for (ViiteItem item : this.items) {
+            if (item.getFieldName().compareTo(fieldName) == 0) {
+                return item.getFieldValue();
+            }
+        }
+        return null;
+    }
+ 
     public String toStringBiBTex() {
-        String bibtex = "@inproceedings{";
+        String bibtex = "@" + this.viiteType + "{";
         bibtex += bibtexCharReplace(this.referenceId) + ",\n";
-        bibtex += "author = {" + bibtexCharReplace(this.author) + "},\n";
-        bibtex += "title = {" + bibtexCharReplace(this.title) + "},\n";
-        bibtex += "booktitle = {" + bibtexCharReplace(this.bookTitle) + "},\n";
-        bibtex += "year = {" + bibtexCharReplace(this.itemYear) + "},\n";
+        for (ViiteItem item : this.items) {
+            bibtex += item.getFieldName() + " = {" + bibtexCharReplace(item.getFieldValue()) + "},\n";
+        }
         bibtex += "}\n";
         return bibtex;
     }
