@@ -18,7 +18,8 @@ public class ViiteController {
 
     @Autowired
     private ViiteService viiteService;
-          
+
+    
     @RequestMapping(value = "/lisaaviite.do", method = RequestMethod.POST, headers = "Accept=application/json")
     @ResponseBody
     public Viite lisaaViite(@RequestBody Viite viite) {
@@ -29,6 +30,15 @@ public class ViiteController {
         return viite;
     }
 
+    
+    @RequestMapping(value = "/poistaviite.do", method = RequestMethod.POST)
+    @ResponseBody
+    public Long lisaaViite(@RequestParam("id") Long viiteId) {
+        viiteService.delete(viiteId);
+        return viiteService.exists(viiteId) ? viiteId : 0;
+    }
+
+    
     @RequestMapping(value = "/listaaviitteet.do", method = RequestMethod.GET)
     public @ResponseBody List<Viite> listaaViitteet() {
         List<Viite> viiteLista = viiteService.list();
@@ -44,5 +54,12 @@ public class ViiteController {
         res.setContentLength(bibtex.length());
         res.setHeader("Content-Disposition", "attachment; filename=\"" + tiedostonNimi + "\"");
         return bibtex;
+    }
+    
+    
+    @RequestMapping(value = "/test.listaaviitteet.do", method = RequestMethod.GET)
+    public @ResponseBody List<Viite> testListaaViitteet() {
+        List<Viite> viiteLista = viiteService.mockList();
+        return viiteLista;
     }
 }
