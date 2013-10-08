@@ -7,6 +7,9 @@ public interface ViiteService {
     Viite findOne(Long id);
     void create(Viite viite);
     List<Viite> list();
-
     public String listAllBiBTeX();
+    public List<Viite> mockList();
+    public void delete(Long viiteId);
+
+    public boolean exists(Long viiteId);
 }
