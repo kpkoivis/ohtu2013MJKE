@@ -22,6 +22,7 @@ import wad.spring.service.ViiteService;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import wad.spring.domain.ViiteItem;
 
 
 
@@ -47,25 +48,57 @@ public class ViiteControllerTest {
         Mockito.reset(viiteServiceMock);
 
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-        
-        String [] authors = {"King, Stephen", "Vihavainen, Arto", "Ankka, Aku"};
-        String [] bookTitles = {"The Shining", "Webpalvelinohjelmointi", "Elämäni epäonnistumiset"};
-        String [] itemYears = {"1977", "2013", "2001"};
-        String [] titles = {"Chapter 1", "joku osa", "Lapsuuteni"};
-        
-        viitteet = new ArrayList<Viite>();
-        
-        for (int i = 0; i < authors.length; i++) {
-            Viite viite = new Viite();
-            viite.setId(new Long(i));
-            viite.setAuthor(authors[i]);
-            viite.setBookTitle(bookTitles[i]);
-            viite.setItemYear(itemYears[i]);
-            viite.setTitle(titles[i]);
-            viitteet.add(viite);
-        }
-    }
 
+        this.viitteet = new ArrayList<Viite>();
+       
+        Viite viite1 = new Viite();
+        viite1.setId(1L);
+        viite1.setViiteType("book");
+        viite1.setReferenceId("HS01");
+        viite1.setItems(new ArrayList<ViiteItem>());
+        viite1.addItem("author/editor","Hawking, Stephen");
+        viite1.addItem("title", "A Brief History of Time");
+        viite1.addItem("publisher","Bantam Dell Publishing Group");
+        viite1.addItem("year", "1988");
+        this.viitteet.add(viite1);
+        
+        Viite viite2 = new Viite();
+        viite2.setId(2L);
+        viite2.setViiteType("inproceedings");
+        viite2.setReferenceId("KSEP");
+        viite2.setItems(new ArrayList<ViiteItem>());
+        viite2.addItem("author","Kääriäinen, Seppo");
+        viite2.addItem("title", "Kepulaisuuden ähkyt ökyrikkaat");
+        viite2.addItem("booktitle","Ääliöt ja Örkit");
+        viite2.addItem("year", "2013");
+        this.viitteet.add(viite2);
+        
+        Viite viite3 = new Viite();
+        viite3.setId(3L);
+        viite3.setViiteType("article");
+        viite3.setReferenceId("FEYR");
+        viite3.setItems(new ArrayList<ViiteItem>());
+        viite3.addItem("author","Feynman, Richard");
+        viite3.addItem("title", "Quantum Physics for Dummies");
+        viite3.addItem("journal","The Dummy things for Dummies");
+        viite3.addItem("year", "2991");
+        this.viitteet.add(viite3);
+
+        Viite viite4 = new Viite();
+        viite4.setId(4L);
+        viite4.setViiteType("misc");
+        viite4.setReferenceId("DFJ1");
+        viite4.setItems(new ArrayList<ViiteItem>());
+        viite4.addItem("author","Doesntfit, James");
+        viite4.addItem("title", "The misfit's reflection");
+        viite4.addItem("howpublished","it was a miracle believe me");
+        viite4.addItem("month","oct");
+        viite4.addItem("year", "1982");
+        viite4.addItem("note","remove this before publication you doughnut!");
+        viite4.addItem("key", "forgot mine at home");
+        this.viitteet.add(viite4);
+    }
+        
     @Test
     public void testRoot() throws Exception {
         mockMvc.perform(get("/")).
@@ -82,34 +115,41 @@ public class ViiteControllerTest {
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$.").isArray())
                 
-                //Test first item (viite) in JSON response
+                //Test first item in JSON response. Should be a "book" kind of viite
                 .andExpect(jsonPath("$..id[0]").value(viitteet.get(0).getId().intValue()))
-                .andExpect(jsonPath("$..author[0]").value(viitteet.get(0).getAuthor()))
-                .andExpect(jsonPath("$..bookTitle[0]").value(viitteet.get(0).getBookTitle()))
-                .andExpect(jsonPath("$..title[0]").value(viitteet.get(0).getTitle()))
+                .andExpect(jsonPath("$..viiteType[0]").value(viitteet.get(0).getViiteType()))
+                .andExpect(jsonPath("$..referenceId[0]").value(viitteet.get(0).getReferenceId()))
+                .andExpect(jsonPath("$..items[0]..fieldName[0]").value("author/editor"))
+                .andExpect(jsonPath("$..items[0]..fieldValue[0]").value(viitteet.get(0).getItemValueWithFieldName("author/editor")))
+                .andExpect(jsonPath("$..items[1]..fieldName[0]").value("title"))
+                .andExpect(jsonPath("$..items[1]..fieldValue[0]").value(viitteet.get(0).getItemValueWithFieldName("title")))
+                .andExpect(jsonPath("$..items[2]..fieldName[0]").value("publisher"))
+                .andExpect(jsonPath("$..items[2]..fieldValue[0]").value(viitteet.get(0).getItemValueWithFieldName("publisher")))
+                .andExpect(jsonPath("$..items[3]..fieldName[0]").value("year"))
+                .andExpect(jsonPath("$..items[3]..fieldValue[0]").value(viitteet.get(0).getItemValueWithFieldName("year")))
                 
-                //Test second item (viite) in JSON response
+                //Test second item in JSON response. should be an "inproceedings" kind of viite
                 .andExpect(jsonPath("$..id[1]").value(viitteet.get(1).getId().intValue()))
-                .andExpect(jsonPath("$..author[1]").value(viitteet.get(1).getAuthor()))
-                .andExpect(jsonPath("$..bookTitle[1]").value(viitteet.get(1).getBookTitle()))
-                .andExpect(jsonPath("$..title[1]").value(viitteet.get(1).getTitle()))
+                .andExpect(jsonPath("$..viiteType[1]").value(viitteet.get(1).getViiteType()))
+                .andExpect(jsonPath("$..referenceId[1]").value(viitteet.get(1).getReferenceId()))
+                .andExpect(jsonPath("$..items[4]..fieldName[0]").value("author"))
+                .andExpect(jsonPath("$..items[4]..fieldValue[0]").value(viitteet.get(1).getItemValueWithFieldName("author")))
+                .andExpect(jsonPath("$..items[5]..fieldName[0]").value("title"))
+                .andExpect(jsonPath("$..items[5]..fieldValue[0]").value(viitteet.get(1).getItemValueWithFieldName("title")))
+                .andExpect(jsonPath("$..items[6]..fieldName[0]").value("booktitle"))
+                .andExpect(jsonPath("$..items[6]..fieldValue[0]").value(viitteet.get(1).getItemValueWithFieldName("booktitle")))
+                .andExpect(jsonPath("$..items[7]..fieldName[0]").value("year"))
+                .andExpect(jsonPath("$..items[7]..fieldValue[0]").value(viitteet.get(1).getItemValueWithFieldName("year")))
                 
-                // We deliberately do not test the third item in JSON response as it should not be there
-/*
-                //Test third item (viite) in JSON response
-                .andExpect(jsonPath("$..id[2]").value(viitteet.get(1).getId().intValue()))
-                .andExpect(jsonPath("$..author[2]").value(viitteet.get(1).getAuthor()))
-                .andExpect(jsonPath("$..bookTitle[2]").value(viitteet.get(1).getBookTitle()))
-                .andExpect(jsonPath("$..title[2]").value(viitteet.get(1).getTitle()))
-*/                
-                .andExpect(jsonPath("$..id[3]").doesNotExist())
+                .andExpect(jsonPath("$..id[2]").doesNotExist())
                 ;
 
         verify(viiteServiceMock, times(1)).list();
         verifyNoMoreInteractions(viiteServiceMock);
-    }
 
-    
+}
+
+    /* Testit vielä kesken
     
      @Test
      public void viiteControllerLisaaViiteTest() throws Exception {
@@ -134,6 +174,8 @@ public class ViiteControllerTest {
         
         verify(viiteServiceMock, times(0)).list();
         //verifyNoMoreInteractions(viiteServiceMock);
-        
+     
      } 
+
+*/
 }

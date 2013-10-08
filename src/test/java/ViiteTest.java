@@ -52,47 +52,18 @@ public class ViiteTest {
     }
 
     @Test
-    public void testAuthor() {
-        viite.setAuthor("Scrooge McDuck");
-        assertEquals(viite.getAuthor(), "Scrooge McDuck");
-    }
-
-    @Test
-    public void testTitle() {
-        viite.setTitle("Minun otsikkoni");
-        assertEquals(viite.getTitle(), "Minun otsikkoni");
-    }
-
-    @Test
-    public void testBookTitle() {
-        viite.setBookTitle("How to get rich in ten days");
-        assertEquals(viite.getBookTitle(), "How to get rich in ten days");
-    }
-
-    @Test
-    public void testItemYear() {
-        viite.setItemYear("1900");
-        assertEquals(viite.getItemYear(), "1900");
-    }
-
-    @Test
-    public void testReferenceId() {
-        viite.setReferenceId("123456");
-        assertEquals(viite.getReferenceId(), "123456");
-    }
-
-    @Test
     public void testToStringBiBTex() {
+        viite.setViiteType("inproceedings");
         String oikea = "@inproceedings{";
         viite.setReferenceId("123456");
         oikea += "123456" + ",\n";
-        viite.setAuthor("Äyskäri Ö. Ämpäri");
+        viite.addItem("author", "Äyskäri Ö. Ämpäri");
         oikea += "author = {\\\"{A}ysk\\\"{a}ri \\\"{O}. \\\"{A}mp\\\"{a}ri},\n";
-        viite.setTitle("Minun otsikkoni");
+        viite.addItem("title", "Minun otsikkoni");
         oikea += "title = {Minun otsikkoni},\n";
-        viite.setBookTitle("How to get rich in ten days");
+        viite.addItem("booktitle", "How to get rich in ten days");
         oikea += "booktitle = {How to get rich in ten days},\n";
-        viite.setItemYear("1900");
+        viite.addItem("year", "1900");
         oikea += "year = {1900},\n";
         oikea += "}\n";
         assertEquals(oikea, viite.toStringBiBTex());
