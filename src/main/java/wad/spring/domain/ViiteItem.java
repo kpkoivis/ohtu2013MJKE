@@ -16,8 +16,8 @@ import javax.persistence.Id;
  */
 public class ViiteItem implements Serializable {
 
-    private String      fieldName;
-    private String      fieldValue;
+    private String fieldName;
+    private String fieldValue;
 
     public String getFieldName() {
         return fieldName;

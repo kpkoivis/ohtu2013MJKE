@@ -65,6 +65,14 @@ public class Viite implements Serializable {
         vi.setFieldValue(fieldValue);
         return this.addItem(vi);
     }
+    public boolean removeItem(String fieldName) {
+        for (ViiteItem item : this.items) {
+            if (item.getFieldName().compareTo(fieldName) == 0) {
+                return removeItem(item);
+            }
+        }
+        return false;
+    }
 
     public String getItemValueWithFieldName(String fieldName) {
         for (ViiteItem item : this.items) {

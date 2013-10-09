@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -10,6 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import wad.spring.domain.Viite;
+import wad.spring.domain.ViiteItem;
 
 /**
  *
@@ -18,6 +20,7 @@ import wad.spring.domain.Viite;
 public class ViiteTest {
 
     static Viite viite;
+    static ViiteItem testViiteItem;
 
     public ViiteTest() {
     }
@@ -25,6 +28,15 @@ public class ViiteTest {
     @BeforeClass
     public static void setUpClass() {
         viite = new Viite();
+        testViiteItem = new ViiteItem();
+        testViiteItem.setFieldName("Kentän nimi");
+        testViiteItem.setFieldValue("Kentän arvo");
+        viite.setId(12345L);
+        viite.setReferenceId("123");
+        viite.setViiteType("Tyyppi");
+        ArrayList<ViiteItem> l = new ArrayList();
+        l.add(testViiteItem);
+        viite.setItems(l);
     }
 
     @AfterClass
@@ -46,26 +58,60 @@ public class ViiteTest {
 
     @Test
     public void testId() {
-        viite.setId(123456789L);
         long id = viite.getId();
-        assertEquals(id, 123456789L);
+        assertEquals(id, 12345L);
+    }
+    @Test
+    public void testReferenceId() {
+        String id = viite.getReferenceId();
+        assertEquals(id, "123");
+    }
+    @Test
+    public void testViiteType() {
+        String type = viite.getViiteType();
+        assertEquals(type, "Tyyppi");
+    }
+    @Test
+    public void testGetItems() {
+        for (ViiteItem i : viite.getItems()) {
+            assertEquals(i.getFieldName(), "Kentän nimi");
+        }
+    }
+    @Test
+    public void testAddRemoveItem() {
+        ViiteItem testi = new ViiteItem();
+        testi.setFieldName("a");
+        testi.setFieldValue("a");
+        assertEquals(viite.addItem(testi), true);
+        assertEquals(viite.removeItem(testi), true);
+    }
+    @Test
+    public void testAddItem() {
+        assertEquals(viite.addItem("a", "b"), true);
+        assertEquals(viite.removeItem("a"), true);
+    }
+    
+    @Test
+    public void testGetItemValueWithName() {
+        assertEquals(viite.getItemValueWithFieldName("Kentän nimi"),"Kentän arvo");
     }
 
     @Test
     public void testToStringBiBTex() {
-        viite.setViiteType("inproceedings");
+        Viite a = new Viite();
+        a.setViiteType("inproceedings");
         String oikea = "@inproceedings{";
-        viite.setReferenceId("123456");
+        a.setReferenceId("123456");
         oikea += "123456" + ",\n";
-        viite.addItem("author", "Äyskäri Ö. Ämpäri");
+        a.addItem("author", "Äyskäri Ö. Ämpäri");
         oikea += "author = {\\\"{A}ysk\\\"{a}ri \\\"{O}. \\\"{A}mp\\\"{a}ri},\n";
-        viite.addItem("title", "Minun otsikkoni");
+        a.addItem("title", "Minun otsikkoni");
         oikea += "title = {Minun otsikkoni},\n";
-        viite.addItem("booktitle", "How to get rich in ten days");
+        a.addItem("booktitle", "How to get rich in ten days");
         oikea += "booktitle = {How to get rich in ten days},\n";
-        viite.addItem("year", "1900");
+        a.addItem("year", "1900");
         oikea += "year = {1900},\n";
         oikea += "}\n";
-        assertEquals(oikea, viite.toStringBiBTex());
+        assertEquals(oikea, a.toStringBiBTex());
     }
 }
