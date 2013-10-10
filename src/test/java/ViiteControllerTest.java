@@ -241,33 +241,28 @@ public class ViiteControllerTest {
         verifyNoMoreInteractions(viiteServiceMock);
      
      }
-     /*
-     @Test
-     public void viiteControllerLataaBibTexTest() throws Exception {
-         when(viiteServiceMock.exists(any(Long.class))).thenReturn(false);
-         
-         ObjectMapper mapper = new ObjectMapper();
-         String jsonViite = mapper.writeValueAsString(viitteet.get(0));
 
-        mockMvc.perform(post("/lataaBibtext.do")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonViite.getBytes())
-        )
+     @Test
+    public void viiteControllerLataaBiBTexTest() throws Exception {
+        String bibtex = "";
+        for (Viite v : viitteet) {
+            bibtex += v.toStringBiBTex() + "\n";
+        }
+        
+        when(viiteServiceMock.listAllBiBTeX()).thenReturn(bibtex);
+
+        String name = "";
+         
+        mockMvc.perform(get("/lataaBibtext.do").param("name", name))
                .andExpect(status().isOk())
-               .andExpect(content().contentType("application/json"))
-               .andExpect(jsonPath("$.").exists())
-               .andExpect(jsonPath("$..id[0]").exists())
-               .andExpect(jsonPath("$..id[1]").doesNotExist())
-               .andExpect(jsonPath("$..id[0]").value(viitteet.get(0).getId().intValue()));
+               .andExpect(content().contentType("text/plain;charset=ISO-8859-1"))
+               .andExpect(content().string(bibtex));
 
   
         verify(viiteServiceMock, times(0)).delete(viite1.getId());
-        verify(viiteServiceMock, times(1)).exists(any(Long.class));
+        verify(viiteServiceMock, times(0)).exists(any(Long.class));
         verify(viiteServiceMock, times(0)).findOne(any(Long.class));
-        verify(viiteServiceMock, times(0)).list();
-        verifyNoMoreInteractions(viiteServiceMock);
-     
+        verify(viiteServiceMock, times(1)).listAllBiBTeX();
+        verifyNoMoreInteractions(viiteServiceMock); 
      }
-     */
-     
 }

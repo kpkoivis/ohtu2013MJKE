@@ -114,4 +114,20 @@ public class ViiteTest {
         oikea += "}\n";
         assertEquals(oikea, a.toStringBiBTex());
     }
+    
+    @Test
+    public void testRemoveNonexistentItemByNameReturnsFalse() {
+        assertEquals(viite.removeItem("b"), false);
+    }
+    
+    @Test
+    public void testGetItemValueWithFieldNameWhenDoesNotExist() {
+        assertEquals(viite.getItemValueWithFieldName("bbb"), null);
+    }
+
+    @Test
+    public void testGetItemValueWithFieldNameWhenDoesExist() {
+        assertEquals(viite.getItemValueWithFieldName("Kentän nimi"), "Kentän arvo");
+    }
+
 }
