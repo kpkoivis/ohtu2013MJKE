@@ -45,29 +45,28 @@ define([
 
        $this.addClass('processed');
 
-      // Loads the references from server.
-      var request = Bacon.once({
-        contentType: 'application/json',
-        dataType: 'json',
-        type: 'post',
-        url: '/poistaviite.do',
-        data: JSON.stringify({id : $ref.data('id') })
-      }).ajax();
+        if(confirm('Haluatko varmasti poistaa viitteen?')) {
+          // Deletes the references from server.
+          var request = Bacon.once({
+            contentType: 'application/json',
+            dataType: 'json',
+            type: 'post',
+            url: '/poistaviite.do',
+            data: JSON.stringify({id : $ref.data('id') })
+          }).ajax();
 
-      // Success callback.
-      request.onValue(function(response) {
-        $ref.fadeOut(300, function() {
-          $(this).remove();
-        });
-      });
+          // Success callback.
+          request.onValue(function(response) {
+            $ref.fadeOut(300, function() {
+              $(this).remove();
+            });
+          });
 
-      // Error callback.
-      request.onError(function(err) {
-        console.log(err);
-      });
-
-       console.log($ref.data('id'))
-
+          // Error callback.
+          request.onError(function(err) {
+            console.log(err);
+          });
+        }
 
     })
 
