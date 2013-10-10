@@ -18,8 +18,8 @@ public class ViiteServiceImpl implements ViiteService {
 
     @Override
     @Transactional
-    public void create(Viite viite) {
-        viiteRepository.save(viite);
+    public Viite create(Viite viite) {
+        return viiteRepository.save(viite);
     }
 
     @Override
