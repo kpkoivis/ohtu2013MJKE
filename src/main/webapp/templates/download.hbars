@@ -5,6 +5,6 @@
         <input id="name-field" name="name" type="text" data-type="field" data-required="true" required />
     </div>
     <button type="submit" class="btn">
-        Lataa BibText muodossa
+        Lataa BibText-muodossa
     </button>
 </form>

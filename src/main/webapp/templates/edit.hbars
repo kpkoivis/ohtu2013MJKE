@@ -1,0 +1,32 @@
+<form id="add-reference" class="add-reference">
+    <h2 class="form-title">Muokkaa viitettä</h2>
+    <div class="form-field">
+        <label>Viitteen tyyppi</label>
+        <select name="referenceType" data-type="meta" required>
+            <option value="article">Article</option>
+            <option value="book">Book</option>
+            <option value="inproceedings">Inproceedings</option>
+            <option value="misc">Misc</option>
+        </select>
+    </div>
+
+    <div class="form-field required">
+        <label for="id-field">Reference id</label>
+        <input id="id-field" name="referenceId" type="text" data-type="meta" data-required="true" required value="{{referenceId}}"/>
+    </div>
+
+    <div id="reference-fields" class="reference-fields">
+        {{#each items}}
+        <div class="form-field required">
+            <label for="{{this.fieldName}}-field">{{this.fieldName}}</label>
+            <input id="{{this.fieldName}}-field" name="{{this.fieldName}}" value="{{this.fieldValue}}" type="text" data-type="field" data-required="true" required />
+        </div>
+        {{/each}}
+    </div>
+
+    <div class="form-field">
+        <button class="submit btn">Tallenna</button>
+        <button class="cancel btn">Peruuta</button>
+    </div>
+
+</form>

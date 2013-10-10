@@ -4,16 +4,16 @@
 </div>
 
 <div class="form-field required">
-<label for="title-field">Title</label>
-<input id="title-field" name="title" type="text" data-type="field" data-required="true" required />
+    <label for="title-field">Title</label>
+    <input id="title-field" name="title" type="text" data-type="field" data-required="true" required />
 </div>
 
 <div class="form-field required">
-<label for="journal-field">Journal</label>
-<input id="journal-field" name="journal" type="text" data-type="field" data-required="true" required />
+    <label for="journal-field">Journal</label>
+    <input id="journal-field" name="journal" type="text" data-type="field" data-required="true" required />
 </div>
 
 <div class="form-field required">
-<label for="year-field">Year</label>
-<input id="year-field" name="itemYear" type="text" data-type="field" data-required="true" required />
+    <label for="year-field">Year</label>
+    <input id="year-field" name="itemYear" type="text" data-type="field" data-required="true" required />
 </div>

@@ -1,8 +1,8 @@
 define([
   'hbs!templates/listref',
-  'dev/dummy-references',
-  'hbs!templates/reference'
-], function(tplList, data, tplReference) {
+  'hbs!templates/reference',
+  'controllers/edit'
+], function(tplList, tplReference, edit) {
   var element = null;
 
   // Renders the login form inside element.
@@ -35,7 +35,8 @@ define([
           $ref = $this.parents('li');
 
       $this.addClass('processed');
-      console.log('fuu');
+
+      edit.init($('#edit-reference'), $ref.data('id'));
     })
 
      elements.find('.delete').not('.processed').on('click', function(e) {

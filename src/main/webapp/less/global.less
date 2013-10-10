@@ -8,9 +8,14 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   background: @colorClouds;
-  margin-top: 80px;
+  padding: 80px 0;
   position: relative;
 }
 
@@ -77,7 +82,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 16px;
 }
 
-.add-reference-form,
+.reference-form,
 .download-references {
   float: left;
   padding: 0 40px;
@@ -136,3 +141,13 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  min-height: 100%;
+}

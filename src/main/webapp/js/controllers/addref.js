@@ -1,8 +1,8 @@
 define([
-  'hbs!templates/addref',
   'bjq',
+  'hbs!templates/addref',
   'controllers/listref'
-], function(tplAddForm, bjq, list) {
+], function(bjq, tplAddForm, list) {
 
   // Renders the login form inside element.
   function render(element) {
@@ -41,6 +41,7 @@ define([
       }).ajax();
 
       request.onValue(function(response) {
+        console.log(list);
         list.add(response);
         element.find('form').each(function() {
           this.reset();

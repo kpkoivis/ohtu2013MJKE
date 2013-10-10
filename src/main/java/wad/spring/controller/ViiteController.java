@@ -37,6 +37,18 @@ public class ViiteController {
         // return viite as is if it wasn't in the database
         return viite;
     }
+
+
+    @RequestMapping(value = "/listaaviite.do", method = RequestMethod.GET)
+    @ResponseBody
+    public Viite listaaViite(@RequestParam("id") Long id) {
+      System.out.println(id);
+
+      Viite viite = viiteService.findOne(id);
+      System.out.println(viite);
+      System.out.println(viiteService.exists(id));
+      return viite;
+    }
     
     
     @RequestMapping(value = "/listaaviitteet.do", method = RequestMethod.GET)
