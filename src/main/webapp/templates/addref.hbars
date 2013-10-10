@@ -2,8 +2,11 @@
     <h2 class="form-title">Lisää viite</h2>
     <div class="form-field">
         <label>Viitteen tyyppi</label>
-        <select name="type" data-type="meta" required>
+        <select name="referenceType" data-type="meta" required>
+            <option value="article">Article</option>
+            <option value="book">Book</option>
             <option value="inproceedings">Inproceedings</option>
+            <option value="misc">Misc</option>
         </select>
     </div>
 
@@ -12,25 +15,10 @@
         <input id="id-field" name="referenceId" type="text" data-type="field" data-required="true" required />
     </div>
 
-    <div class="form-field required">
-        <label for="author-field">Author</label>
-        <input id="author-field" name="author" type="text" data-type="field" data-required="true" required />
-    </div>
+   <div id="reference-fields" class="reference-fields">
+       {{> templates_type_article }}
 
-    <div class="form-field required">
-        <label for="title-field">Title</label>
-        <input id="title-field" name="title" type="text" data-type="field" data-required="true" required />
-    </div>
-
-    <div class="form-field required">
-        <label for="title-field">Book Title</label>
-        <input id="title-field" name="bookTitle" type="text" data-type="field" data-required="true" required />
-    </div>
-
-    <div class="form-field required">
-        <label for="year-field">Year</label>
-        <input id="year-field" name="itemYear" type="text" data-type="field" data-required="true" required />
-    </div>
+   </div>
 
     <div class="form-field">
         <button class="submit btn">Lähetä</button>

@@ -1,0 +1,34 @@
+<div class="form-field ">
+    <label for="author-field">Author</label>
+    <input id="author-field" name="author" type="text" data-type="field" />
+</div>
+
+<div class="form-field ">
+    <label for="title-field">Title</label>
+    <input id="title-field" name="title" type="text" data-type="field" />
+</div>
+
+<div class="form-field ">
+    <label for="howpublished-field">How published</label>
+    <input id="howpublished-field" name="howpublished" type="text" data-type="field" />
+</div>
+
+<div class="form-field ">
+    <label for="month-field">Month</label>
+    <input id="month-field" name="month" type="text" data-type="field" />
+</div>
+
+<div class="form-field ">
+    <label for="year-field">Year</label>
+    <input id="year-field" name="itemYear" type="text" data-type="field" />
+</div>
+
+<div class="form-field ">
+    <label for="note-field">Note</label>
+    <input id="note-field" name="note" type="text" data-type="field" />
+</div>
+
+<div class="form-field ">
+    <label for="key-field">Key</label>
+    <input id="key-field" name="key" type="text" data-type="field" />
+</div>

@@ -2,16 +2,25 @@ define([
   'hbs!templates/addref',
   'bjq',
   'controllers/listref'
-], function(tplList, bjq, list) {
+], function(tplAddForm, bjq, list) {
 
   // Renders the login form inside element.
   function render(element) {
-    element.html(tplList());
+    element.html(tplAddForm());
     bindEvents(element);
   }
 
   // Add form events.
   function bindEvents(element) {
+    var referenceTypeChange = element.find('[name="referenceType"]').asEventStream('change').map(function(e) {return $(e.target).val(); });
+
+    referenceTypeChange.onValue(function(type) {
+      require(['hbs!templates/type/' + type], function(tpl) {
+        element.find('#reference-fields').html(tpl());
+      });
+      console.log(type);
+    })
+
     var submitClick = element.find('button.submit').asEventStream('click').doAction('.preventDefault');
 
     // TODO: Don't allow form submission without all fields filled.
