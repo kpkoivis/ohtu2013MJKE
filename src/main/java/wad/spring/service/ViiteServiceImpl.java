@@ -1,6 +1,5 @@
 package wad.spring.service;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +61,7 @@ public class ViiteServiceImpl implements ViiteService {
        
         Viite viite1 = new Viite();
         viite1.setId(1L);
-        viite1.setViiteType("book");
+        viite1.setReferenceType("book");
         viite1.setReferenceId("HS01");
         viite1.setItems(new ArrayList<ViiteItem>());
         viite1.addItem("author/editor","Hawking, Stephen");
@@ -73,7 +72,7 @@ public class ViiteServiceImpl implements ViiteService {
         
         Viite viite2 = new Viite();
         viite2.setId(2L);
-        viite2.setViiteType("inproceedings");
+        viite2.setReferenceType("inproceedings");
         viite2.setReferenceId("KSEP");
         viite2.setItems(new ArrayList<ViiteItem>());
         viite2.addItem("author","Kääriäinen, Seppo");
@@ -84,7 +83,7 @@ public class ViiteServiceImpl implements ViiteService {
         
         Viite viite3 = new Viite();
         viite3.setId(3L);
-        viite3.setViiteType("article");
+        viite3.setReferenceType("article");
         viite3.setReferenceId("FEYR");
         viite3.setItems(new ArrayList<ViiteItem>());
         viite3.addItem("author","Feynman, Richard");
@@ -95,7 +94,7 @@ public class ViiteServiceImpl implements ViiteService {
 
         Viite viite4 = new Viite();
         viite4.setId(4L);
-        viite4.setViiteType("misc");
+        viite4.setReferenceType("misc");
         viite4.setReferenceId("DFJ1");
         viite4.setItems(new ArrayList<ViiteItem>());
         viite4.addItem("author","Doesntfit, James");

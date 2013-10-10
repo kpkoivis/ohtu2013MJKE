@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.http.MediaType;
-import static org.junit.Assert.*;
 
 import wad.spring.config.WebAppContext;
 import wad.spring.domain.Viite;
@@ -57,7 +56,7 @@ public class ViiteControllerTest {
        
         viite1 = new Viite();
         viite1.setId(0L);
-        viite1.setViiteType("book");
+        viite1.setReferenceType("book");
         viite1.setReferenceId("HS01");
         viite1.setItems(new ArrayList<ViiteItem>());
         viite1.addItem("author/editor","Hawking, Stephen");
@@ -68,7 +67,7 @@ public class ViiteControllerTest {
         
         viite2 = new Viite();
         viite2.setId(2L);
-        viite2.setViiteType("inproceedings");
+        viite2.setReferenceType("inproceedings");
         viite2.setReferenceId("KSEP");
         viite2.setItems(new ArrayList<ViiteItem>());
         viite2.addItem("author","Kääriäinen, Seppo");
@@ -79,7 +78,7 @@ public class ViiteControllerTest {
         
         viite3 = new Viite();
         viite3.setId(3L);
-        viite3.setViiteType("article");
+        viite3.setReferenceType("article");
         viite3.setReferenceId("FEYR");
         viite3.setItems(new ArrayList<ViiteItem>());
         viite3.addItem("author","Feynman, Richard");
@@ -90,7 +89,7 @@ public class ViiteControllerTest {
 
         viite4 = new Viite();
         viite4.setId(4L);
-        viite4.setViiteType("misc");
+        viite4.setReferenceType("misc");
         viite4.setReferenceId("DFJ1");
         viite4.setItems(new ArrayList<ViiteItem>());
         viite4.addItem("author","Doesntfit, James");
@@ -121,7 +120,7 @@ public class ViiteControllerTest {
                 
                 //Test first item in JSON response. Should be a "book" kind of viite
                 .andExpect(jsonPath("$..id[0]").value(viitteet.get(0).getId().intValue()))
-                .andExpect(jsonPath("$..viiteType[0]").value(viitteet.get(0).getViiteType()))
+                .andExpect(jsonPath("$..viiteType[0]").value(viitteet.get(0).getReferenceType()))
                 .andExpect(jsonPath("$..referenceId[0]").value(viitteet.get(0).getReferenceId()))
                 .andExpect(jsonPath("$..items[0]..fieldName[0]").value("author/editor"))
                 .andExpect(jsonPath("$..items[0]..fieldValue[0]").value(viitteet.get(0).getItemValueWithFieldName("author/editor")))
@@ -134,7 +133,7 @@ public class ViiteControllerTest {
                 
                 //Test second item in JSON response. should be an "inproceedings" kind of viite
                 .andExpect(jsonPath("$..id[1]").value(viitteet.get(1).getId().intValue()))
-                .andExpect(jsonPath("$..viiteType[1]").value(viitteet.get(1).getViiteType()))
+                .andExpect(jsonPath("$..viiteType[1]").value(viitteet.get(1).getReferenceType()))
                 .andExpect(jsonPath("$..referenceId[1]").value(viitteet.get(1).getReferenceId()))
                 .andExpect(jsonPath("$..items[4]..fieldName[0]").value("author"))
                 .andExpect(jsonPath("$..items[4]..fieldValue[0]").value(viitteet.get(1).getItemValueWithFieldName("author")))
@@ -172,7 +171,7 @@ public class ViiteControllerTest {
                .andExpect(jsonPath("$..id[1]").doesNotExist())
                .andExpect(jsonPath("$..id[0]").value(viite1.getId().intValue()))
                .andExpect(jsonPath("$..referenceId[0]").value(viite1.getReferenceId()))
-               .andExpect(jsonPath("$..viiteType[0]").value(viite1.getViiteType()))
+               .andExpect(jsonPath("$..viiteType[0]").value(viite1.getReferenceType()))
                .andExpect(jsonPath("$..items[0]..fieldName[0]").value("author/editor"))
                .andExpect(jsonPath("$..items[0]..fieldValue[0]").value(viite1.getItemValueWithFieldName("author/editor")))
                .andExpect(jsonPath("$..items[1]..fieldName[0]").value("title"))

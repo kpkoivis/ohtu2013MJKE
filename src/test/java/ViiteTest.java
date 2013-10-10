@@ -33,7 +33,7 @@ public class ViiteTest {
         testViiteItem.setFieldValue("Kentän arvo");
         viite.setId(12345L);
         viite.setReferenceId("123");
-        viite.setViiteType("Tyyppi");
+        viite.setReferenceType("Tyyppi");
         ArrayList<ViiteItem> l = new ArrayList();
         l.add(testViiteItem);
         viite.setItems(l);
@@ -68,7 +68,7 @@ public class ViiteTest {
     }
     @Test
     public void testViiteType() {
-        String type = viite.getViiteType();
+        String type = viite.getReferenceType();
         assertEquals(type, "Tyyppi");
     }
     @Test
@@ -99,7 +99,7 @@ public class ViiteTest {
     @Test
     public void testToStringBiBTex() {
         Viite a = new Viite();
-        a.setViiteType("inproceedings");
+        a.setReferenceType("inproceedings");
         String oikea = "@inproceedings{";
         a.setReferenceId("123456");
         oikea += "123456" + ",\n";

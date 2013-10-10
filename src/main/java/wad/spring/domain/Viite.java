@@ -15,7 +15,7 @@ public class Viite implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long                    id;
     private String                  referenceId;
-    private String                  viiteType;
+    private String                  referenceType;
     private ArrayList<ViiteItem>    items = new ArrayList<ViiteItem>();
     
     
@@ -35,12 +35,12 @@ public class Viite implements Serializable {
         this.referenceId = referenceId;
     }
 
-    public String getViiteType() {
-        return viiteType;
+    public String getReferenceType() {
+        return referenceType;
     }
 
-    public void setViiteType(String viiteType) {
-        this.viiteType = viiteType;
+    public void setReferenceType(String referenceType) {
+        this.referenceType = referenceType;
     }
 
     public List<ViiteItem> getItems() {
@@ -84,7 +84,7 @@ public class Viite implements Serializable {
     }
  
     public String toStringBiBTex() {
-        String bibtex = "@" + this.viiteType + "{";
+        String bibtex = "@" + this.referenceType + "{";
         bibtex += bibtexCharReplace(this.referenceId) + ",\n";
         for (ViiteItem item : this.items) {
             bibtex += item.getFieldName() + " = {" + bibtexCharReplace(item.getFieldValue()) + "},\n";
