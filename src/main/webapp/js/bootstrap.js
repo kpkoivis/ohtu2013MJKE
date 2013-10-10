@@ -37,9 +37,11 @@ require([
   'bacon',
   'lodash',
   'controllers/listref',
-  'controllers/addref'
-], function($, bacon, _, list, add) {
+  'controllers/addref',
+  'controllers/download'
+], function($, bacon, _, list, add, download) {
 
   list.init($('#list-references'));
   add.init($('#add-reference'));
+  download.init($('#download-references'));
 })

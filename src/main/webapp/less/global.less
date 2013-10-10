@@ -78,9 +78,61 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .add-reference-form,
-.reference-list {
+.download-references {
   float: left;
   padding: 0 40px;
   width: 400px;
+}
+
+.download-references {
+  float: right;
+}
+
+.reference-list {
+  float: left;
+}
+
+.references {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.reference {
+
+  padding: 4px 90px 4px 10px;
+  position: relative;
+  background-color: #fafafa;
+  border: 1px solid #ccc;
+  border-top: none;
+
+  &:first-child {
+    border-top: 1px solid #ccc;
+  }
+
+  .actions {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -6px;
+    text-align: right;
+    font-size: 12px;
+    widht: 80px;
+  }
+
+  .edit,
+  .delete {
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 5px;
+  }
+
+  .edit {
+    color: green;
+  }
+
+  .delete {
+    color: red;
+  }
 }
 

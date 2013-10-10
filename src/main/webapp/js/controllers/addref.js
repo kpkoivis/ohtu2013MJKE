@@ -29,17 +29,19 @@ define([
     submitClick.onValue(function() {
       var data = getFormValues(element.find('form'));
 
+      console.log(data);
+
       // Ajax post request for adding data.
       var request = Bacon.once({
         contentType: 'application/json',
         dataType: 'json',
         type: 'post',
-        data: JSON.stringify(data.fields),
+        data: JSON.stringify(data),
         url: '/lisaaviite.do'
       }).ajax();
 
       request.onValue(function(response) {
-        list.add(data.fields);
+        list.add(response);
         element.find('form').each(function() {
           this.reset();
         });
@@ -55,11 +57,12 @@ define([
   function getFormValues(form) {
     var fields = form.find('[data-type="field"]'),
         meta = form.find('[data-type="meta"]'),
-        data = {'fields' : {}};
+        data = {'items' : []};
 
     fields.each(function(i, el) {
       var el = $(el);
-      data.fields[el.prop('name')] = el.val();
+      //data.fields[el.prop('name')] = el.val();
+      data.items.push({'fieldName' : el.prop('name'), 'fieldValue' : el.val()});
     })
 
     meta.each(function(i, el) {

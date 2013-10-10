@@ -1,13 +1,4 @@
-<form action="/lataaBibtext.do" method="get">
-    <h2 class="form-title">Lataa viitteet</h2>
-    <div class="form-field required">
-        <label for="name-field">Tiedoston nimi</label>
-        <input id="name-field" name="name" type="text" data-type="field" data-required="true" required />
-    </div>
-    <button type="submit" class="btn">
-        Lataa BibText muodossa
-    </button>
-</form>
+<h2>Viitteet</h2>
 
 <ul class="references">
     {{#each this}}

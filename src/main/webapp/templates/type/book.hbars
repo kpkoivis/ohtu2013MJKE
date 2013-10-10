@@ -1,6 +1,6 @@
 <div class="form-field required">
     <label for="author-field">Author/Editor</label>
-    <input id="author-field" name="author" type="text" data-type="field" data-required="true" required />
+    <input id="author-field" name="author/editor" type="text" data-type="field" data-required="true" required />
 </div>
 
 <div class="form-field required">

@@ -12,7 +12,7 @@
 
     <div class="form-field required">
         <label for="id-field">Reference id</label>
-        <input id="id-field" name="referenceId" type="text" data-type="field" data-required="true" required />
+        <input id="id-field" name="referenceId" type="text" data-type="meta" data-required="true" required />
     </div>
 
    <div id="reference-fields" class="reference-fields">
