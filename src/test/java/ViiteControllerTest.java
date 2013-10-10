@@ -120,7 +120,7 @@ public class ViiteControllerTest {
                 
                 //Test first item in JSON response. Should be a "book" kind of viite
                 .andExpect(jsonPath("$..id[0]").value(viitteet.get(0).getId().intValue()))
-                .andExpect(jsonPath("$..viiteType[0]").value(viitteet.get(0).getReferenceType()))
+                .andExpect(jsonPath("$..referenceType[0]").value(viitteet.get(0).getReferenceType()))
                 .andExpect(jsonPath("$..referenceId[0]").value(viitteet.get(0).getReferenceId()))
                 .andExpect(jsonPath("$..items[0]..fieldName[0]").value("author/editor"))
                 .andExpect(jsonPath("$..items[0]..fieldValue[0]").value(viitteet.get(0).getItemValueWithFieldName("author/editor")))
@@ -133,7 +133,7 @@ public class ViiteControllerTest {
                 
                 //Test second item in JSON response. should be an "inproceedings" kind of viite
                 .andExpect(jsonPath("$..id[1]").value(viitteet.get(1).getId().intValue()))
-                .andExpect(jsonPath("$..viiteType[1]").value(viitteet.get(1).getReferenceType()))
+                .andExpect(jsonPath("$..referenceType[1]").value(viitteet.get(1).getReferenceType()))
                 .andExpect(jsonPath("$..referenceId[1]").value(viitteet.get(1).getReferenceId()))
                 .andExpect(jsonPath("$..items[4]..fieldName[0]").value("author"))
                 .andExpect(jsonPath("$..items[4]..fieldValue[0]").value(viitteet.get(1).getItemValueWithFieldName("author")))
@@ -171,7 +171,7 @@ public class ViiteControllerTest {
                .andExpect(jsonPath("$..id[1]").doesNotExist())
                .andExpect(jsonPath("$..id[0]").value(viite1.getId().intValue()))
                .andExpect(jsonPath("$..referenceId[0]").value(viite1.getReferenceId()))
-               .andExpect(jsonPath("$..viiteType[0]").value(viite1.getReferenceType()))
+               .andExpect(jsonPath("$..referenceType[0]").value(viite1.getReferenceType()))
                .andExpect(jsonPath("$..items[0]..fieldName[0]").value("author/editor"))
                .andExpect(jsonPath("$..items[0]..fieldValue[0]").value(viite1.getItemValueWithFieldName("author/editor")))
                .andExpect(jsonPath("$..items[1]..fieldName[0]").value("title"))
