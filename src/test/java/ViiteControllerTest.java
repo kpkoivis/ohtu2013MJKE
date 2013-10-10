@@ -2,6 +2,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.http.MediaType;
+import static org.junit.Assert.*;
 
 import wad.spring.config.WebAppContext;
 import wad.spring.domain.Viite;
@@ -32,7 +34,9 @@ import wad.spring.domain.ViiteItem;
 public class ViiteControllerTest {
 
     private MockMvc mockMvc;
+    
     private List<Viite> viitteet; 
+    Viite viite1, viite2, viite3, viite4;
 
     @Autowired
     private ViiteService viiteServiceMock;
@@ -51,8 +55,8 @@ public class ViiteControllerTest {
 
         this.viitteet = new ArrayList<Viite>();
        
-        Viite viite1 = new Viite();
-        viite1.setId(1L);
+        viite1 = new Viite();
+        viite1.setId(0L);
         viite1.setViiteType("book");
         viite1.setReferenceId("HS01");
         viite1.setItems(new ArrayList<ViiteItem>());
@@ -62,7 +66,7 @@ public class ViiteControllerTest {
         viite1.addItem("year", "1988");
         this.viitteet.add(viite1);
         
-        Viite viite2 = new Viite();
+        viite2 = new Viite();
         viite2.setId(2L);
         viite2.setViiteType("inproceedings");
         viite2.setReferenceId("KSEP");
@@ -73,7 +77,7 @@ public class ViiteControllerTest {
         viite2.addItem("year", "2013");
         this.viitteet.add(viite2);
         
-        Viite viite3 = new Viite();
+        viite3 = new Viite();
         viite3.setId(3L);
         viite3.setViiteType("article");
         viite3.setReferenceId("FEYR");
@@ -84,7 +88,7 @@ public class ViiteControllerTest {
         viite3.addItem("year", "2991");
         this.viitteet.add(viite3);
 
-        Viite viite4 = new Viite();
+        viite4 = new Viite();
         viite4.setId(4L);
         viite4.setViiteType("misc");
         viite4.setReferenceId("DFJ1");
@@ -148,34 +152,123 @@ public class ViiteControllerTest {
         verifyNoMoreInteractions(viiteServiceMock);
 
 }
-
-    /* Testit vielä kesken
     
      @Test
      public void viiteControllerLisaaViiteTest() throws Exception {
-        String createJson = "{\"id\":%d,\"author\":\"%s\",\"title\":\"%s\",\"bookTitle\":\"%s\"}";
+         
+         when(viiteServiceMock.create(any(Viite.class))).thenReturn(viite1);
+         
+         ObjectMapper mapper = new ObjectMapper();
+         String jsonViite = mapper.writeValueAsString(viitteet.get(0));
 
         mockMvc.perform(post("/lisaaviite.do")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(String.format(createJson, viitteet.get(0).getId(),
-                                                   viitteet.get(0).getAuthor(),
-                                                   viitteet.get(0).getTitle(),
-                                                   viitteet.get(0).getBookTitle())
-                .getBytes())
- 
+                .content(jsonViite.getBytes())
         )
                .andExpect(status().isOk())
                .andExpect(content().contentType("application/json"))
                .andExpect(jsonPath("$.").exists())
-               .andExpect(jsonPath("$..id[0]").value(viitteet.get(0).getId().intValue()))
-               .andExpect(jsonPath("$..author[0]").value(viitteet.get(0).getAuthor()))
-               .andExpect(jsonPath("$..bookTitle[0]").value(viitteet.get(0).getBookTitle()))
-               .andExpect(jsonPath("$..title[0]").value(viitteet.get(0).getTitle()));
-        
+               .andExpect(jsonPath("$..id[0]").exists())
+               .andExpect(jsonPath("$..id[1]").doesNotExist())
+               .andExpect(jsonPath("$..id[0]").value(viite1.getId().intValue()))
+               .andExpect(jsonPath("$..referenceId[0]").value(viite1.getReferenceId()))
+               .andExpect(jsonPath("$..viiteType[0]").value(viite1.getViiteType()))
+               .andExpect(jsonPath("$..items[0]..fieldName[0]").value("author/editor"))
+               .andExpect(jsonPath("$..items[0]..fieldValue[0]").value(viite1.getItemValueWithFieldName("author/editor")))
+               .andExpect(jsonPath("$..items[1]..fieldName[0]").value("title"))
+               .andExpect(jsonPath("$..items[1]..fieldValue[0]").value(viite1.getItemValueWithFieldName("title")))
+               .andExpect(jsonPath("$..items[2]..fieldName[0]").value("publisher"))
+               .andExpect(jsonPath("$..items[2]..fieldValue[0]").value(viite1.getItemValueWithFieldName("publisher")))
+               .andExpect(jsonPath("$..items[3]..fieldName[0]").value("year"))
+               .andExpect(jsonPath("$..items[3]..fieldValue[0]").value(viite1.getItemValueWithFieldName("year")));
+               
+        verify(viiteServiceMock, times(1)).create(any(Viite.class));
         verify(viiteServiceMock, times(0)).list();
-        //verifyNoMoreInteractions(viiteServiceMock);
+        verifyNoMoreInteractions(viiteServiceMock);
      
-     } 
+     }
+    
+     @Test
+     public void viiteControllerPoistaViiteWhenItIsInDatabaseTest() throws Exception {
+         when(viiteServiceMock.exists(any(Long.class))).thenReturn(true);
+         //when(viiteServiceMock.delete(any(Long.class))).thenReturn(Long.class);
+         
+         ObjectMapper mapper = new ObjectMapper();
+         String jsonViite = mapper.writeValueAsString(viitteet.get(0));
 
-*/
+        mockMvc.perform(post("/poistaviite.do")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonViite.getBytes())
+        )
+               .andExpect(status().isOk())
+               .andExpect(content().contentType("application/json"))
+               .andExpect(jsonPath("$.").exists())
+               .andExpect(jsonPath("$..id[0]").exists())
+               .andExpect(jsonPath("$..id[1]").doesNotExist())
+               .andExpect(jsonPath("$..id[0]").value(-1));
+
+  
+        verify(viiteServiceMock, times(1)).delete(viite1.getId());
+        verify(viiteServiceMock, times(1)).exists(any(Long.class));
+        verify(viiteServiceMock, times(0)).findOne(any(Long.class));
+        verify(viiteServiceMock, times(0)).list();
+        verifyNoMoreInteractions(viiteServiceMock);
+     
+     }
+     
+     @Test
+     public void viiteControllerPoistaViiteWhenItIsNotInDatabaseTest() throws Exception {
+         when(viiteServiceMock.exists(any(Long.class))).thenReturn(false);
+         
+         ObjectMapper mapper = new ObjectMapper();
+         String jsonViite = mapper.writeValueAsString(viitteet.get(0));
+
+        mockMvc.perform(post("/poistaviite.do")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonViite.getBytes())
+        )
+               .andExpect(status().isOk())
+               .andExpect(content().contentType("application/json"))
+               .andExpect(jsonPath("$.").exists())
+               .andExpect(jsonPath("$..id[0]").exists())
+               .andExpect(jsonPath("$..id[1]").doesNotExist())
+               .andExpect(jsonPath("$..id[0]").value(viitteet.get(0).getId().intValue()));
+
+  
+        verify(viiteServiceMock, times(0)).delete(viite1.getId());
+        verify(viiteServiceMock, times(1)).exists(any(Long.class));
+        verify(viiteServiceMock, times(0)).findOne(any(Long.class));
+        verify(viiteServiceMock, times(0)).list();
+        verifyNoMoreInteractions(viiteServiceMock);
+     
+     }
+     /*
+     @Test
+     public void viiteControllerLataaBibTexTest() throws Exception {
+         when(viiteServiceMock.exists(any(Long.class))).thenReturn(false);
+         
+         ObjectMapper mapper = new ObjectMapper();
+         String jsonViite = mapper.writeValueAsString(viitteet.get(0));
+
+        mockMvc.perform(post("/lataaBibtext.do")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonViite.getBytes())
+        )
+               .andExpect(status().isOk())
+               .andExpect(content().contentType("application/json"))
+               .andExpect(jsonPath("$.").exists())
+               .andExpect(jsonPath("$..id[0]").exists())
+               .andExpect(jsonPath("$..id[1]").doesNotExist())
+               .andExpect(jsonPath("$..id[0]").value(viitteet.get(0).getId().intValue()));
+
+  
+        verify(viiteServiceMock, times(0)).delete(viite1.getId());
+        verify(viiteServiceMock, times(1)).exists(any(Long.class));
+        verify(viiteServiceMock, times(0)).findOne(any(Long.class));
+        verify(viiteServiceMock, times(0)).list();
+        verifyNoMoreInteractions(viiteServiceMock);
+     
+     }
+     */
+     
 }
