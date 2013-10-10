@@ -22,22 +22,26 @@ public class ViiteController {
     
     @RequestMapping(value = "/lisaaviite.do", method = RequestMethod.POST, headers = "Accept=application/json")
     @ResponseBody
-    public Viite lisaaViite(@RequestBody Viite viite) {
- 
-        // Pitäisi tarkistaa onko viite jo olemassa..
-
-        viiteService.create(viite);
-        return viite;
+    public Viite lisaaViite(@RequestBody Viite viite) { 
+        // Pitäisi tarkistaa onko viite jo olemassa..luotetaan toistaiseksi frontendiin
+        return viiteService.create(viite);
     }
 
     
-    @RequestMapping(value = "/poistaviite.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/poistaviite.do", method = RequestMethod.POST, headers = "Accept=application/json")
     @ResponseBody
-    public Long lisaaViite(@RequestParam("id") Long viiteId) {
-        viiteService.delete(viiteId);
-        return viiteService.exists(viiteId) ? viiteId : 0;
-    }
+    public Viite poistaViite(@RequestBody Viite viite) {
+        Long id = viite.getId();
 
+        if (viiteService.exists(id)) {
+            viiteService.delete(id);
+            viite.setId(-1L);
+            return viite;
+        }
+        // return viite as is if it wasn't in the database
+        return viite;
+    }
+    
     
     @RequestMapping(value = "/listaaviitteet.do", method = RequestMethod.GET)
     public @ResponseBody List<Viite> listaaViitteet() {
@@ -61,5 +65,13 @@ public class ViiteController {
     public @ResponseBody List<Viite> testListaaViitteet() {
         List<Viite> viiteLista = viiteService.mockList();
         return viiteLista;
+    }
+    
+    @RequestMapping(value = "/test2.listaaviitteet.do", method = RequestMethod.GET)
+    public @ResponseBody int test2ListaaViitteet() {
+        //List<Viite> viiteLista = viiteService.mockList();
+        //return viiteLista;
+        int Id = 1;
+        return Id;
     }
 }
